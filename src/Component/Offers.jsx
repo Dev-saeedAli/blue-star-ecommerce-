@@ -7,20 +7,20 @@ const Offers = () => {
   return (
       <div className="container py-2 text-light">
         <div className="row text-center">
-          <div className="col-sm col-md-4 justify-content-center d-flex align-items-center justify-content-md-start">
+          <div className=" my-1 my-md-0 col-sm col-md-4 justify-content-center d-flex align-items-center justify-content-md-start">
             <BsTelephoneForward />
             <span>+000093499989</span>
           </div>
-          <div className="col-sm col-md-4 justify-content-center">
+          <div className=" my-1 my-md-0 col-sm col-md-4 justify-content-center">
             <Para className="lead">Get 50% off on selected Items | Shop Now</Para>
           </div>
-          <div className="col-sm col-md-4 justify-content-center d-flex align-items-center justify-content-md-center">
+          <div className=" my-1 my-md-0 col-sm col-md-4 justify-content-center d-flex align-items-center justify-content-md-center">
             <form className="d-flex justify-content-center justify-content-md-end w-100 gap-3">
               <Select className="form-form-select" name="languages" id="languages">
                 <Option value="">Eng</Option>
                 <Option value="arab">Arab</Option>
               </Select>
-              <Select  className="form-form-select" name="location" id="location">
+              <Select  className=" my-1 my-md-0 form-form-select" name="location" id="location">
                 <Option value="">Location</Option>
                 <Option value="india">India</Option>
                 <Option value="uae">Uae</Option>
