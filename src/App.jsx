@@ -11,15 +11,15 @@ import styled from 'styled-components'
 const App = () => {
   return (
     <>
-    <Wrapper className='container-fluid'>
-     <Offers />
-     </Wrapper>
-     <Header />
-     <Home />
-     {/* <FilterProducts />
-     <ProductDetail />
-    <ProductCheckout /> */}
-     <Footer />
+      <Wrapper className='container-fluid'>
+        <Offers />
+      </Wrapper>
+        <Header />
+        <Home />
+        {/* <FilterProducts />
+        <ProductDetail />
+        <ProductCheckout /> */}
+      <Footer />
     </>
   )
 }

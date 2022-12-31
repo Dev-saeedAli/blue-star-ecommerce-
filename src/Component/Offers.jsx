@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Offers = () => {
 
   return (
-      <div className="container py-2 text-light">
+      <div className="container-fluid container-lg py-2 text-light">
         <div className="row text-center">
           <div className=" my-1 my-md-0 col-sm col-md-4 justify-content-center d-flex align-items-center justify-content-md-start">
             <BsTelephoneForward />
