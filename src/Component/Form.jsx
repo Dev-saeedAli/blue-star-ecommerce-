@@ -2,12 +2,16 @@ import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Form = () => {
+  const styles = {
+    fontSize:".9rem"
+  }
   return (
     <>
       <form className="d-flex" role="search">
         <label htmlFor="form-label"></label>
         <div className="form-group d-flex justify-space-around bg-white rounded-pill">
           <input
+            style={styles}
             className="shadow-none form-control me-2 bg-transparent border-0"
             type="search"
             placeholder="Search Products"
