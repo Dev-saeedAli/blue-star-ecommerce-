@@ -1,36 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import furniture from "../../images/furniture.avif";
 import HeadPhones from "../../images/headPhones.avif";
 import Bags from "../../images/bag.avif";
 import laptop from "../../images/laptop.avif";
 import Book from "../../images/book.avif";
+import Tech from "../../images/tech.avif";
+import Travel from "../../images/travel.avif";
+import Beauty from "../../images/beauty.avif";
+import Snickers from "../../images/snickers.avif";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import "swiper/css"
+import "swiper/css";
 
 const Categories = () => {
-  const [state, setState] = useState("")
-
-  useEffect(() => {
-    const handleResize = () => {
-      if(window.innerWidth>300 && window.innerWidth<=550){
-        setState("sm")
-      }
-      if(window.innerWidth>551 && window.innerWidth<= 899){
-        setState("md")
-      }
-      if(window.innerWidth > 899){
-        setState("lg")
-      }
-   }
-
-    window.addEventListener('resize', handleResize)
-
-    return ()=> window.removeEventListener('resize', handleResize)
-  })
-
-  
   const categoryArray = [
     {
       id: Math.random() * 1000000,
@@ -57,52 +39,87 @@ const Categories = () => {
       img: Book,
       name: "Book",
     },
+    {
+      id: Math.random() * 1000000,
+      img: Tech,
+      name: "Tech",
+    },
+    {
+      id: Math.random() * 1000000,
+      img: Snickers,
+      name: "Snickers",
+    },
+    {
+      id: Math.random() * 1000000,
+      img: Beauty,
+      name: "Beauty",
+    },
+    {
+      id: Math.random() * 1000000,
+      img: Travel,
+      name: "Travel",
+    },
   ];
 
   return (
-    <div className="container my-4">
-      <H2 className="fw-bold text-uppercase my-3">Shop Our Top Category</H2>
-      <div className="row d-flex justify-content-md-between align-items-md-center gap-2">
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={state === "sm" ? 1 : state === "md" ? 3 : 5}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-        >
-          {categoryArray.map((item) => {
-            return (
-              <SwiperSlide key={item.id}>
-                {
-                  <div
-                 
-                    className="col col-md-3 col-lg-2 my-3 my-lg-0"
-                  >
-                    <Cards className="card text-bg-dark rounded-pill">
-                      <ImageStyles
-                        src={item.img}
-                        className="card-img img-fluid "
-                        alt={item.name}
-                      />
+    <section className="container my-4">
+      <H2 className="fw-bold text-uppercase my-3 mx-0">Shop Our Top Category</H2>
+      <div className="container-fluid container-lg p-lg-0">
+        <div className="row d-flex align-items-md-center justify-content-start">
+          <Swiper
+            spaceBetween={5}
+            breakpoints={{
+              // when window width is >= 300px
+              300: {
+                width: 300,
+                slidesPerView: 1,
+              },
+              640: {
+                width: 640,
+                slidesPerView: 3,
+              },
+              // when window width is >= 768px
+              768: {
+                width: 768,
+                slidesPerView: 4,
+              },
+              1024: {
+                width: 1024,
+                slidesPerView: 4,
+              },
+            }}
+          >
+            {categoryArray.map((item) => {
+              return (
+                <SwiperSlide key={item.id}>
+                  {
+                    <div className="col col-md-3 col-lg-2 my-3 my-lg-0">
+                      <Cards className="card text-bg-dark rounded-pill">
+                        <ImageStyles
+                        loading="lazy"
+                          src={item.img}
+                          className="card-img img-fluid "
+                          alt={item.name}
+                        />
 
-                      <div className="card-img-overlay">
-                        <H3 className="card-title">{item.name}</H3>
-                      </div>
-                    </Cards>
-                  </div>
-                }
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+                        <div className="card-img-overlay">
+                          <H3 className="card-title">{item.name}</H3>
+                        </div>
+                      </Cards>
+                    </div>
+                  }
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 const Cards = styled.div`
   height: 18.875rem;
-  min-width: 10.5rem;
+  min-width: 11.5rem;
   border: none;
   cursor: pointer;
 `;
