@@ -1,117 +1,101 @@
-import React from "react";
-import furniture from "../../images/furniture.avif";
-import HeadPhones from "../../images/headPhones.avif";
-import Bags from "../../images/bag.avif";
-import laptop from "../../images/laptop.avif";
-import Book from "../../images/book.avif";
-import Tech from "../../images/tech.avif";
-import Travel from "../../images/travel.avif";
-import Beauty from "../../images/beauty.avif";
-import Snickers from "../../images/snickers.avif";
+import React, { useEffect } from "react";
+import mensFashion from "../../images/mens-fashion.avif";
+import womenFashion from "../../images/womens-fashion.avif";
+import jewlaryAndWatches from "../../images/jewlary-and-watches.avif";
+import bagsAndShoes from "../../images/bags-and-shoes.avif";
+import computers from "../../images/computers.avif";
+import phoneAndTablets from "../../images/phone-and-tablets.avif";
+import toolsAndHardware from "../../images/tools-and-hardware.avif";
+import homeAndFurniture from "../../images/home-and-furniture.avif";
+import tech from "../../images/tech.avif";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "../../app/features/categorySlice/categorySlice";
 
 const Categories = () => {
-  const categoryArray = [
-    {
-      id: Math.random() * 1000000,
-      img: furniture,
-      name: "Furniture",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: HeadPhones,
-      name: "HeadPhones",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Bags,
-      name: "Bags",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: laptop,
-      name: "Laptop",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Book,
-      name: "Book",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Tech,
-      name: "Tech",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Snickers,
-      name: "Snickers",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Beauty,
-      name: "Beauty",
-    },
-    {
-      id: Math.random() * 1000000,
-      img: Travel,
-      name: "Travel",
-    },
-  ];
+  const {loading, categories} = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   return (
     <section className="container my-4">
-      <H2 className="fw-bold text-uppercase my-3 mx-0">Shop Our Top Category</H2>
+      <H2 className="fw-bold text-uppercase my-3 mx-0">
+        Shop Our Top Category
+      </H2>
       <div className="container-fluid container-lg p-lg-0">
         <div className="row d-flex align-items-md-center justify-content-start">
-          <Swiper
-            spaceBetween={5}
-            breakpoints={{
-              // when window width is >= 300px
-              300: {
-                width: 300,
-                slidesPerView: 1,
-              },
-              640: {
-                width: 640,
-                slidesPerView: 3,
-              },
-              // when window width is >= 768px
-              768: {
-                width: 768,
-                slidesPerView: 4,
-              },
-              1024: {
-                width: 1024,
-                slidesPerView: 4,
-              },
-            }}
-          >
-            {categoryArray.map((item) => {
-              return (
-                <SwiperSlide key={item.id}>
-                  {
-                    <div className="col col-md-3 col-lg-2 my-3 my-lg-0">
-                      <Cards className="card text-bg-dark rounded-pill">
-                        <ImageStyles
-                        loading="lazy"
-                          src={item.img}
-                          className="card-img img-fluid "
-                          alt={item.name}
-                        />
-
-                        <div className="card-img-overlay">
-                          <H3 className="card-title">{item.name}</H3>
-                        </div>
-                      </Cards>
-                    </div>
-                  }
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          {loading ? <div className="text-center"><h3>Loading....</h3></div> :(
+              <Swiper
+              spaceBetween={5}
+              breakpoints={{
+                // when window width is >= 300px
+                300: {
+                  width: 300,
+                  slidesPerView: 1,
+                },
+                640: {
+                  width: 640,
+                  slidesPerView: 3,
+                },
+                // when window width is >= 768px
+                768: {
+                  width: 768,
+                  slidesPerView: 4,
+                },
+                1024: {
+                  width: 1024,
+                  slidesPerView: 4,
+                },
+              }}
+            >
+              {categories.map((category) => {
+                const { _id, slug, name } = category;
+                return (
+                  <SwiperSlide key={_id}>
+                    {
+                      <div className="col col-md-3 col-lg-2 my-3 my-lg-0">
+                        <Cards className="card text-bg-dark rounded-pill">
+                          <ImageStyles
+                            loading="lazy"
+                            src={
+                              slug === `mens-fashion`
+                                ? mensFashion
+                                : slug === "womens-fashion"
+                                ? womenFashion
+                                : slug === "jewlary-and-watches"
+                                ? jewlaryAndWatches
+                                : slug === "bags-and-shoes"
+                                ? bagsAndShoes
+                                : slug === "computers"
+                                ? computers
+                                : slug === "phone-and-tablets"
+                                ? phoneAndTablets
+                                : slug === "tools-and-hardware"
+                                ? toolsAndHardware
+                                : slug === "home-and-furniture"
+                                ? homeAndFurniture
+                                : tech
+                            }
+                            className="card-img img-fluid "
+                            alt={name}
+                          />
+  
+                          <div className="card-img-overlay">
+                            <H3 className="card-title">{name}</H3>
+                          </div>
+                        </Cards>
+                      </div>
+                    }
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          )}
         </div>
       </div>
     </section>

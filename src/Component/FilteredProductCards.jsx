@@ -1,8 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import bag from "../images/bag.avif"
-import furniture from "../images/furniture.avif"
 
 const FilteredProductCards = () => {
+  const { productCategory } = useSelector(state=> state.productList);
+
+  console.log(productCategory)
+
+
   return (
     <>
   <div className="row row-cols-1 row-cols-md-4 g-4">
