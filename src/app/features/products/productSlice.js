@@ -7,9 +7,9 @@ const initialState = {
 }
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async() =>{
-    const response = await fetch('https://api.escuelajs.co/api/v1/categories')
+    const response = await fetch('https://fakestoreapi.com/products/categories')
     const data = await response.json()
-    return data.filter(item => item.id !== 11 && item.id!==12); // filtering out the id 11 and 12 because the api is providing an empty array
+    return data;
 }); 
 
 const productSlice = createSlice({

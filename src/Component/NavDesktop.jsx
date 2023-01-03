@@ -14,7 +14,7 @@ const NavDesktop = () => {
             <div className="col d-flex align-items-center justify-content-start">
               <a className="navbar-brand" href="/">
                 <span className="d-flex align-items-center gap-2">
-                  <AiOutlineShoppingCart size={30} className="text-info" />
+                  <AiOutlineShoppingCart size={30} className="text-success" />
                   <H1>Blue Star</H1>
                 </span>
               </a>

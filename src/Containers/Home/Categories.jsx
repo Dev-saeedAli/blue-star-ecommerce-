@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../app/features/categorySlice/categorySlice";
+import Spinner from "../../Component/Spinner";
 
 const Categories = () => {
   const {loading, categories} = useSelector((state) => state.category);
@@ -20,6 +21,8 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(fetchCategories());
+
+    return () => dispatch(fetchCategories());
   }, []);
 
   return (
@@ -29,7 +32,11 @@ const Categories = () => {
       </H2>
       <div className="container-fluid container-lg p-lg-0">
         <div className="row d-flex align-items-md-center justify-content-start">
-          {loading ? <div className="text-center"><h3>Loading....</h3></div> :(
+          {loading ? 
+          
+          <div className="row row-cols-1 row-cols-md-4 g-4" style={{minHeight: "70vh"}}>
+            <Spinner/>
+          </div> :(
               <Swiper
               spaceBetween={5}
               breakpoints={{

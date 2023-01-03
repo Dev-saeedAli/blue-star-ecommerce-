@@ -1,20 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getProductList from "../../app/features/getProductsList/getProductList";
+import {getProductList} from "../../app/features/getProductsList/getProductList";
 import { fetchProducts } from "../../app/features/products/productSlice";
 import FilteredProductCards from "../../Component/FilteredProductCards";
+import Spinner from "../../Component/Spinner";
 
 const Deals = () => {
+  const [active, setActive] = useState("electronics")
+
   const {loading, product } = useSelector(state => state.product)
   const dispatch = useDispatch()
 
   useEffect(() => {
       dispatch(fetchProducts())
-      return()=>   dispatch(fetchProducts())
+      return()=> dispatch(fetchProducts())
   }, [])
-
-
-
 
   return (
     <section className="container my-3">
@@ -24,20 +24,29 @@ const Deals = () => {
           e.preventDefault();
         }}
       >
-        {product.map((item) => {
-          const { id, image, name} = item; 
+         {loading ? (
+          <div className="row row-cols-1 row-cols-md-4 g-4" style={{minHeight: "70vh"}}>
+          <div className="col w-100 d-flex align-items-center justify-content-center">
+            <Spinner/>
+          </div>
+          </div>
+          ) : 
+        (product.map((item, index) => {
             return (
               <button
-                onClick={()=> dispatch(getProductList(id))}
-                key={id}
+                onClick={()=> {
+                  dispatch(getProductList(item))
+                  setActive(item)
+                }}
+                key={index}
                 type="submit"
-                className="btn rounded-pill btn-outline-success mx-2 my-3"
+                className={`btn rounded-pill ${active === item ? "btn-success":"btn-outline-success"} mx-2 my-3`}
               >
-                {item.name}
+                {item}
               </button>
             );
         }
-        )}
+        ))}
       </form>
       <FilteredProductCards/>
     </section>
