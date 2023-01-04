@@ -1,9 +1,7 @@
 import React from 'react'
-import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillCartFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
-// import { BsFillCartFill } from "react-icons/bs";
-// import { FaUserAlt } from "react-icons/fa";
 import styled from "styled-components";
 import Form from './Form';
 
@@ -19,7 +17,7 @@ const NavMobile = () => {
             </span>
           </a>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler shadow-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar"

@@ -7,12 +7,14 @@ const initialState = {
     error:""
 }
 
+// fake store api 
 export const getProductList = createAsyncThunk("productItems/getProductList", async(name) =>{
     const response = await fetch(`https://fakestoreapi.com/products/category/${name}`)
     const data = await response.json();
     return data;
 }); 
 
+// fake store api default when page loads
 export const displayDefault = createAsyncThunk("productItems/displayDefault", async () =>{
     const response = await fetch(`https://fakestoreapi.com/products/category/electronics`)
     const data = await response.json();

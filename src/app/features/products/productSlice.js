@@ -6,6 +6,7 @@ const initialState = {
     error:""
 }
 
+// fake store api
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async() =>{
     const response = await fetch('https://fakestoreapi.com/products/categories')
     const data = await response.json()

@@ -25,7 +25,7 @@ const App = () => {
 }
 
 const Wrapper = styled.div`
-  background : #013d29;
+  background : #198754;
 `
 
 export default App

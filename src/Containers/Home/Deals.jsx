@@ -18,15 +18,16 @@ const Deals = () => {
 
   return (
     <section className="container my-3">
-      <h2>Todays Best Deals for you</h2>
+      <h2 className="fw-bold mt-5 text-center text-md-start mb-3 mb-md-2">Todays Best Deals for you</h2>
       <form
+      className="text-center text-md-start"
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
          {loading ? (
           <div className="row row-cols-1 row-cols-md-4 g-4" style={{minHeight: "70vh"}}>
-          <div className="col w-100 d-flex align-items-center justify-content-center">
+          <div className="col w-100 d-flex align-align-items-center  justify-content-center">
             <Spinner/>
           </div>
           </div>
@@ -40,7 +41,7 @@ const Deals = () => {
                 }}
                 key={index}
                 type="submit"
-                className={`btn rounded-pill ${active === item ? "btn-success":"btn-outline-success"} mx-2 my-3`}
+                className={`btn rounded-pill ${active === item ? "btn-success":"btn-outline-success"} mx-2 my-md-5 my-3 `}
               >
                 {item}
               </button>

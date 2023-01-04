@@ -27,7 +27,7 @@ const Categories = () => {
 
   return (
     <section className="container my-4">
-      <H2 className="fw-bold text-uppercase my-3 mx-0">
+      <H2 className="fw-bold text-uppercase my-3 mt-5 mx-0">
         Shop Our Top Category
       </H2>
       <div className="container-fluid container-lg p-lg-0">

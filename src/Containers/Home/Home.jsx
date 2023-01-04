@@ -1,21 +1,20 @@
 import React from "react"
-// import Brands from "./Brands"
+import Brands from "./Brands"
 import Categories from "./Categories"
 import Deals from "./Deals"
-// import FilterCategories from "./FilterCategories"
+import FAQ from "./FAQ"
 import Hero from "./Hero"
-// import Newsletter from "./Newsletter"
+import Newsletter from "./Newsletter"
 
 const Home = () => {
     return (
         <>
-     
             <Hero />
             <Categories />
             <Deals />
-            {/* <FilterCategories />
             <Brands />
-            <Newsletter /> */}
+            <Newsletter />
+            <FAQ />
       
         </>
     )
