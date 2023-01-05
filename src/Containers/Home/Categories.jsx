@@ -1,23 +1,38 @@
 import React, { useEffect } from "react";
-import mensFashion from "../../images/mens-fashion.avif";
-import womenFashion from "../../images/womens-fashion.avif";
-import jewlaryAndWatches from "../../images/jewlary-and-watches.avif";
-import bagsAndShoes from "../../images/bags-and-shoes.avif";
+import smartPhone from "../../images/smart_phone.avif";
+import fragrance from "../../images/fragrance.avif";
 import computers from "../../images/computers.avif";
-import phoneAndTablets from "../../images/phone-and-tablets.avif";
-import toolsAndHardware from "../../images/tools-and-hardware.avif";
+import skincare from "../../images/skincare.avif";
+import groceries from "../../images/groceries.avif";
+import homeDecoration from "../../images/home-decoration.avif";
 import homeAndFurniture from "../../images/home-and-furniture.avif";
-import tech from "../../images/tech.avif";
+import womenTops from "../../images/women-tops.avif";
+import womenDresses from "../../images/women-dresses.avif";
+import womenShoes from "../../images/women-shoes.avif";
+import menShirt from "../../images/mens-shirt.avif";
+import menShoes from "../../images/mens-shoes.avif";
+import menWatch from "../../images/mens-watches.avif";
+import womenWatch from "../../images/womens-watches.avif";
+import womenBags from "../../images/womens-bags.avif";
+import womenJewel from "../../images/womens-jewellery.avif";
+import sunGlasses from "../../images/sunglasses.avif";
+import automotive from "../../images/automotive.avif";
+import motorcycle from "../../images/motorcycle.avif";
+import lighting from "../../images/lighting.avif";
+import errorImage from "../../images/error-404.webp";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../app/features/categorySlice/categorySlice";
 import Spinner from "../../Component/Spinner";
+import { Link} from "react-router-dom"
+import { fetchFilterList } from "../../app/features/filterCategorySlice/filterCategorySlice";
 
 const Categories = () => {
   const {loading, categories} = useSelector((state) => state.category);
   const dispatch = useDispatch();
+ 
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -60,42 +75,70 @@ const Categories = () => {
                 },
               }}
             >
-              {categories.map((category) => {
-                const { _id, slug, name } = category;
+              {categories?.map((category, index) => {
                 return (
-                  <SwiperSlide key={_id}>
+                  <SwiperSlide key={index}>
                     {
                       <div className="col col-md-3 col-lg-2 my-3 my-lg-0">
-                        <Cards className="card text-bg-dark rounded-pill">
+                        <Link to={`/products/${category}`}>
+                        <Cards className="card text-bg-dark rounded-pill" onClick={() => {
+                           dispatch(fetchFilterList(category))
+                        }}>
                           <ImageStyles
                             loading="lazy"
                             src={
-                              slug === `mens-fashion`
-                                ? mensFashion
-                                : slug === "womens-fashion"
-                                ? womenFashion
-                                : slug === "jewlary-and-watches"
-                                ? jewlaryAndWatches
-                                : slug === "bags-and-shoes"
-                                ? bagsAndShoes
-                                : slug === "computers"
+                              //! loading images depends upon category 
+                              category === "smartphones"
+                                ? smartPhone
+                                : category === "laptops"
                                 ? computers
-                                : slug === "phone-and-tablets"
-                                ? phoneAndTablets
-                                : slug === "tools-and-hardware"
-                                ? toolsAndHardware
-                                : slug === "home-and-furniture"
+                                : category === "fragrances"
+                                ? fragrance
+                                : category === "skincare"
+                                ? skincare
+                                : category === "groceries"
+                                ? groceries
+                                : category === "home-decoration"
+                                ? homeDecoration
+                                : category === "furniture"
                                 ? homeAndFurniture
-                                : tech
+                                : category === "tops"
+                                ? womenTops
+                                : category === "womens-dresses"
+                                ? womenDresses
+                                : category === "womens-shoes"
+                                ? womenShoes
+                                : category === "mens-shirts"
+                                ? menShirt
+                                : category === "mens-shoes"
+                                ? menShoes
+                                : category === "mens-watches"
+                                ? menWatch
+                                : category === "womens-watches"
+                                ? womenWatch
+                                : category === "womens-bags"
+                                ? womenBags
+                                : category === "womens-jewellery"
+                                ? womenJewel
+                                : category === "sunglasses"
+                                ? sunGlasses
+                                : category === "automotive"
+                                ? automotive
+                                : category === "motorcycle"
+                                ? motorcycle
+                                : category === "lighting"
+                                ? lighting
+                                : errorImage
                             }
                             className="card-img img-fluid "
-                            alt={name}
+                            alt={category+ "image"}
                           />
   
                           <div className="card-img-overlay">
-                            <H3 className="card-title">{name}</H3>
+                            <H3 className="card-title">{category}</H3>
                           </div>
                         </Cards>
+                        </Link>
                       </div>
                     }
                   </SwiperSlide>

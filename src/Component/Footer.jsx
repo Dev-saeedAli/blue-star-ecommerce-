@@ -7,6 +7,7 @@ import americalExpress from "../images/symbol (2).png";
 import paypal from "../images/paypal.png";
 import applePay from  "../images/apple-pay.png";
 import amazonPay from "../images/amazon-pay.png";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -19,7 +20,7 @@ const Footer = () => {
             <Small className='ms-1 text-success fw-bold'>BLUESTAR</Small>
           <P className='lh-base my-2'>Bluestar is the trading of goods and services on the internet. It is your bustling city center or brick-and-mortar shop translated into zeroes and ones on the internet superhighway.</P>
             </div>
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-3 text-center">
               <H3 className='fw-bold'>Accepted Payments</H3>
               <div className='mt-3 d-flex justify-content-start flex-wrap gap-3'>
              <a href="https://www.flaticon.com/free-icons/visa" target="_blank" title="visa icons">

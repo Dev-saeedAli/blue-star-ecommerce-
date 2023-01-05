@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillCartFill } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import Form from './Form';
 
@@ -10,12 +11,12 @@ const NavMobile = () => {
         <>
           <nav className="navbar bg-body-tertiary d-lg-none d-block">
         <div className="container-fluid container-lg">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <span className="d-flex align-items-center">
               <AiOutlineShoppingCart size={30} className="text-success" />
               <H1>Blue Star</H1>
             </span>
-          </a>
+          </Link>
           <button
             className="navbar-toggler shadow-none"
             type="button"

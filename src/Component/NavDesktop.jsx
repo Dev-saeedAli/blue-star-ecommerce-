@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { BsFillCartFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import Form from './Form';
 
@@ -12,12 +13,12 @@ const NavDesktop = () => {
         <div className="container">
           <div className="row  d-flex align-items-center h-100 w-100 py-2">
             <div className="col d-flex align-items-center justify-content-start">
-              <a className="navbar-brand" href="/">
+              <Link className="navbar-brand" to="/">
                 <span className="d-flex align-items-center gap-2">
                   <AiOutlineShoppingCart size={30} className="text-success" />
                   <H1>Blue Star</H1>
                 </span>
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"

@@ -1,32 +1,34 @@
-import React from 'react'
-import Footer from './Component/Footer'
-import Header from './Component/Header'
-import Offers from './Component/Offers'
-import Home from './Containers/Home/Home'
-// import FilterProducts from './Containers/Products/FilterProducts'
-// import ProductCheckout from './Containers/Products/ProductCheckout'
-// import ProductDetail from './Containers/Products/ProductDetail'
-import "../src/index.css"
-import styled from 'styled-components'
+import React, { Fragment } from "react";
+import Footer from "./Component/Footer";
+import Header from "./Component/Header";
+import Offers from "./Component/Offers";
+import Home from "./Containers/Home/Home";
+import { Routes, Route } from "react-router-dom";
+import FilterProducts from './Containers/Products/FilterProducts';
+import ProductCheckout from "./Containers/Products/ProductCheckout";
+import ProductDetail from "./Containers/Products/ProductDetail";
+import "../src/index.css";
+import styled from "styled-components";
 const App = () => {
   return (
-    <>
-      <Wrapper className='container-fluid'>
+    <Fragment>
+      <Wrapper className="container-fluid">
         <Offers />
       </Wrapper>
-        <Header />
-        <Home />
-        {/* <FilterProducts />
-        <ProductDetail />
-        <ProductCheckout /> */}
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products/:category" element={<FilterProducts />} />
+        <Route path="/product/detail/:id" element={<ProductDetail />} />
+        <Route path="/product/checkout" element={<ProductCheckout />} />
+      </Routes>
       <Footer />
-    </>
-  )
-}
+    </Fragment>
+  );
+};
 
 const Wrapper = styled.div`
-  background : #198754;
-`
+  background: #198754;
+`;
 
-export default App
-
+export default App;

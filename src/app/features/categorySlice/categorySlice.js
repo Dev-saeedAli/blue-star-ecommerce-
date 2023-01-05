@@ -8,9 +8,9 @@ const initialState = {
 
 // store api
 export const fetchCategories = createAsyncThunk('category/fetchCategories', async()=> {
-    const response = await fetch('https://api.storerestapi.com/categories');
+    const response = await fetch('https://dummyjson.com/products/categories');
     const data = await response.json();
-    return data.data;
+    return data;
 }) 
 
 

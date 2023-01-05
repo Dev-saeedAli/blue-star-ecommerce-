@@ -85,12 +85,13 @@ const FilteredProductCards = () => {
                     src={image}
                     className="card-img-top"
                     alt="title"
+                    loading="lazy"
                     style={{ height: "170px", objectFit: "cover" }}
                   />
                   <div className="card-body">
                     <H3 className="card-title">{title.length > 50 ? title.slice(0, 50):title}...</H3>
                     <p className="card-text">$ {parseInt(price).toFixed(2)}</p>
-                    {Array(Math.floor(rating.rate))
+                    {Array(Math.round(rating.rate))
                       .fill("0")
                       .map((_, index) => (
                         <Stars
