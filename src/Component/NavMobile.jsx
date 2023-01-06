@@ -1,15 +1,18 @@
-import React from 'react'
+import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { BsFillCartFill } from 'react-icons/bs';
-import { FaUserAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { BsFillCartFill } from "react-icons/bs";
+import { FaUserAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Form from './Form';
+import Form from "./Form";
 
 const NavMobile = () => {
-    return (
-        <>
-          <nav className="navbar bg-body-tertiary d-lg-none d-block">
+  const { products } = useSelector((state) => state.cartItems);
+  const navigate = useNavigate()
+  return (
+    <>
+      <nav className="navbar bg-body-tertiary d-lg-none d-block">
         <div className="container-fluid container-lg">
           <Link className="navbar-brand" to="/">
             <span className="d-flex align-items-center">
@@ -23,7 +26,7 @@ const NavMobile = () => {
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar"
-            >
+          >
             <span className="d-block d-lg-none navbar-toggler-icon"></span>
           </button>
           <div
@@ -31,13 +34,13 @@ const NavMobile = () => {
             tabIndex="-1"
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
-            >
+          >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              <span className="d-flex align-items-center gap-2">
-              <AiOutlineShoppingCart size={30} className="text-info" />
-              <H1>Blue Star</H1>
-            </span>
+                <span className="d-flex align-items-center gap-2">
+                  <AiOutlineShoppingCart size={30} className="text-info" />
+                  <H1>Blue Star</H1>
+                </span>
               </h5>
               <button
                 type="button"
@@ -55,7 +58,7 @@ const NavMobile = () => {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    >
+                  >
                     Categories
                   </a>
                   <ul className="dropdown-menu">
@@ -102,22 +105,27 @@ const NavMobile = () => {
                   </a>
                 </li>
               </ul>
-                <hr className="divider"/>
-              <Form/>
+              <hr className="divider" />
+              <Form />
               <div className="col d-flex align-items-center gap-3 mt-5 justify-content-center">
-              <FaUserAlt />
-              <Small>Account</Small>
-              <BsFillCartFill />
-              <Small>Cart</Small>
-            </div>
+                <FaUserAlt />
+                <Small>Account</Small>
+                <Small className="position-relative" onClick={() => navigate('/product/cart')}>
+                <BsFillCartFill />
+                  {" "}
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {products.length}
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                </Small>
+              </div>
             </div>
           </div>
         </div>
       </nav>
-      
     </>
-  )
-}
+  );
+};
 
 const Small = styled.small`
   font-size: 1rem;
@@ -127,4 +135,4 @@ const Small = styled.small`
 const H1 = styled.h1`
   font-size: 1.5rem;
 `;
-export default NavMobile
+export default NavMobile;

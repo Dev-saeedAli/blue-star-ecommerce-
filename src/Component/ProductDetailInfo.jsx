@@ -1,7 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { addToCart } from '../app/features/Cart/cartSlice';
 
-const ProductDetailInfo = ({rating, price, stock, title , description, discountPercentage}) => {
+const ProductDetailInfo = ({id, rating, price, stock, title , description, discountPercentage, img}) => {
+  const dispatch = useDispatch()
+  
   return (
     <div className="row row-cols-1 align-content-center">
     <div className="col mb-3  border-dark border border-start-0 border-top-0 border-end-0">
@@ -31,19 +35,27 @@ const ProductDetailInfo = ({rating, price, stock, title , description, discountP
         </span>
       </p>
       <div className="d-flex align-items-center mt-3 gap-2">
-        <button className="btn btn-light rounded-pill">+</button>
-        <span>1</span>
         <button className="btn btn-light rounded-pill">-</button>
+        <span>1</span>
+        <button className="btn btn-light rounded-pill">+</button>
         <p className="mx-4">
           Only <span className="text-warning">{stock} items</span>{" "}
           is available dont miss out!{" "}
         </p>
       </div>
       <div className="d-flex justify-content-center justify-content-lg-start gap-4 mt-4">
-        <button className="btn btn-success rounded-pill px-lg-5">
+        <button className="btn btn-success rounded-pill px-lg-5" onClick={() => {
+          dispatch(addToCart({
+            "id" : id, "img":img, "rate" : rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
+          }))
+        }}>
           Buy Now
         </button>
-        <button className="btn btn-outline-success rounded-pill px-lg-5">
+        <button className="btn btn-outline-success rounded-pill px-lg-5" onClick={() => {
+          dispatch(addToCart({
+            "id" : id, "img":img, "rate" :rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
+          }))
+        }}>
           Add to cart
         </button>
       </div>

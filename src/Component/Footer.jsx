@@ -40,7 +40,7 @@ const Footer = () => {
              </a>
 
          
-             <a href="https://www.flaticon.com/free-icons/amazon-pay" title="amazon pay icons"> <PaymentCards src={amazonPay} alt="amazonpay image" /></a>
+             <a href="https://www.flaticon.com/free-icons/amazon-pay" target="_blank" title="amazon pay icons"> <PaymentCards src={amazonPay} alt="amazonpay image" /></a>
              
               </div>
             </div>

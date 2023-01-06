@@ -9,6 +9,7 @@ import ProductCheckout from "./Containers/Products/ProductCheckout";
 import ProductDetail from "./Containers/Products/ProductDetail";
 import "../src/index.css";
 import styled from "styled-components";
+import ShoppingCart from "./Containers/Products/ShoppingCart";
 const App = () => {
   return (
     <Fragment>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/products/:category" element={<FilterProducts />} />
         <Route path="/product/detail/:id" element={<ProductDetail />} />
         <Route path="/product/checkout" element={<ProductCheckout />} />
+        <Route path="/product/cart" element={<ShoppingCart />} />
       </Routes>
       <Footer />
     </Fragment>

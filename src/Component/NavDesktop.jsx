@@ -1,12 +1,15 @@
 import React from 'react'
-import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillCartFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import Form from './Form';
 
 const NavDesktop = () => {
+  const navigate = useNavigate()
+  const { products }  = useSelector(state => state.cartItems)
   return (
       <>
          <nav className="navbar navbar-expand-lg bg-body-tertiary d-lg-block d-none">
@@ -92,8 +95,14 @@ const NavDesktop = () => {
             <div className="col d-flex align-items-center gap-3">
               <FaUserAlt />
               <Small>Account</Small>
-              <BsFillCartFill />
-              <Small>Cart</Small>
+              <Small className="position-relative" onClick={() => navigate('/product/cart')}>
+                <BsFillCartFill size={30} />
+                  {" "}
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {products.length}
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                </Small>
             </div>
           </div>
         </div>

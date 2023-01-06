@@ -1,62 +1,22 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { displayDefault } from "../app/features/getProductsList/getProductList";
 import Spinner from "./Spinner";
-import { AiOutlineHeart } from "react-icons/ai";
+import ProductCategory from "./ProductCategory";
+import DefaultProduct from "./DefaultProduct";
+import { displayDefault } from "../app/features/getProductsList/getProductList";
 
 const FilteredProductCards = () => {
-  const dispatch = useDispatch();
-  const { loading, productCategory, defaultProduct } = useSelector(
+  const dispatch = useDispatch()
+  const { loading, productCategory} = useSelector(
     (state) => state.productList
   );
+   useEffect(() => {
+        dispatch(displayDefault());
+    
+        return () => dispatch(displayDefault());
+      }, []);
 
-  useEffect(() => {
-    dispatch(displayDefault());
-
-    return () => dispatch(displayDefault());
-  }, []);
-
-  const category = productCategory.map(
-    ({ title, price, rating, image, id }) => {
-      return (
-        <div className="col" key={id}>
-          <div className="card h-100 mh-100">
-            <span className="badge rounded-pill position-absolute top-0 end-0">
-              <AiOutlineHeart
-                style={{ background: "white" }}
-                size={45}
-                color={"black"}
-                className="border-2 p-2 rounded-circle border border-light"
-              />
-            </span>
-            <img
-              src={image}
-              className="card-img-top"
-              alt="..."
-              style={{ height: "170px", objectFit: "cover" }}
-            />
-            <div className="card-body">
-              <H3 className="card-title">{title.length > 50 ? title.slice(0, 50):title}...</H3>
-              <p className="card-text">$ {parseInt(price).toFixed(2)}</p>
-              {Array(Math.floor(rating.rate))
-                .fill("0")
-                .map((_, index) => (
-                  <Stars className=" d-inline-block my-2 mx-0" key={index}>
-                    &#9733;
-                  </Stars>
-                ))}
-                   <button className="btn d-block btn-outline-success rounded-pill my-1">
-                      Add to Cart
-                    </button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  );
-
-  // console.log(rating)
 
   return (
     <>
@@ -67,48 +27,9 @@ const FilteredProductCards = () => {
         {loading ? (
           <Spinner />
         ) : productCategory.length > 0 ? (
-          category // category that is mapped above
+          <ProductCategory/>// category that is mapped above
         ) : (
-          defaultProduct?.map(({ title, price, rating, image, id }) => {
-            return (
-              <div className="col" key={id}>
-                <div className="card h-100 mh-100 position-relative">
-                  <span className="badge rounded-pill position-absolute top-0 end-0">
-                    <AiOutlineHeart
-                      style={{ background: "white" }}
-                      size={45}
-                      color={"black"}
-                      className="border-2 p-2 rounded-circle border border-light"
-                    />
-                  </span>
-                  <img
-                    src={image}
-                    className="card-img-top"
-                    alt="title"
-                    loading="lazy"
-                    style={{ height: "170px", objectFit: "cover" }}
-                  />
-                  <div className="card-body">
-                    <H3 className="card-title">{title.length > 50 ? title.slice(0, 50):title}...</H3>
-                    <p className="card-text">$ {parseInt(price).toFixed(2)}</p>
-                    {Array(Math.round(rating.rate))
-                      .fill("0")
-                      .map((_, index) => (
-                        <Stars
-                          className=" d-inline-block my-2 mx-0"
-                          key={index}
-                        >
-                          &#9733;
-                        </Stars>
-                      ))}
-                    <button className="btn d-block btn-outline-success rounded-pill my-3">
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })
+         <DefaultProduct/>
         )}
       </div>
     </>
