@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { addToCart } from '../app/features/Cart/cartSlice';
 
 const ProductDetailInfo = ({id, rating, price, stock, title , description, discountPercentage, img}) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [quantity, setQuantity] = useState(1)
+
+  const increment = () => {
+    setQuantity((prevQuantity) => prevQuantity += 1)
+  }
+  const decrement = () => {
+    setQuantity((prevQuantity) => prevQuantity += 1)
+  }
   
   return (
     <div className="row row-cols-1 align-content-center">
@@ -35,9 +45,9 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
         </span>
       </p>
       <div className="d-flex align-items-center mt-3 gap-2">
-        <button className="btn btn-light rounded-pill">-</button>
-        <span>1</span>
-        <button className="btn btn-light rounded-pill">+</button>
+        <button className="btn btn-light rounded-pill" onClick={decrement}>-</button>
+        <span>{quantity}</span>
+        <button className="btn btn-light rounded-pill" onClick={increment}>+</button>
         <p className="mx-4">
           Only <span className="text-warning">{stock} items</span>{" "}
           is available dont miss out!{" "}
@@ -45,9 +55,10 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
       </div>
       <div className="d-flex justify-content-center justify-content-lg-start gap-4 mt-4">
         <button className="btn btn-success rounded-pill px-lg-5" onClick={() => {
-          dispatch(addToCart({
-            "id" : id, "img":img, "rate" : rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
-          }))
+            navigate('/product/order')
+            localStorage.setItem('order', JSON.stringify({
+              "id" : id, "img":img, "rate" :rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage, "quantity":quantity
+            }))
         }}>
           Buy Now
         </button>
