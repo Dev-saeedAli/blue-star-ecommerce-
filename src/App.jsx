@@ -9,7 +9,8 @@ import ProductCheckout from "./Containers/Products/ProductCheckout";
 import ProductDetail from "./Containers/Products/ProductDetail";
 import "../src/index.css";
 import styled from "styled-components";
-import OrderItems from "./Containers/Products/ShoppingCart";
+import OrderItems from "./Containers/Products/OrderItems";
+import CartProducts from "./Containers/Products/CartProducts";
 const App = () => {
   return (
     <Fragment>
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/product/detail/:id" element={<ProductDetail />} />
         <Route path="/product/checkout" element={<ProductCheckout />} />
         <Route path="/product/order" element={<OrderItems/>} />
+        <Route path="/product/cart" element={<CartProducts/>} />
       </Routes>
       <Footer />
     </Fragment>

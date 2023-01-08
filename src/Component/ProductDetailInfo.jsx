@@ -11,9 +11,14 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
 
   const increment = () => {
     setQuantity((prevQuantity) => prevQuantity += 1)
+   
   }
   const decrement = () => {
-    setQuantity((prevQuantity) => prevQuantity += 1)
+    if(quantity <= 1){
+      setQuantity(1)
+    }else {
+      setQuantity((prevQuantity) => prevQuantity -= 1)
+    }
   }
   
   return (
@@ -57,14 +62,14 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
         <button className="btn btn-success rounded-pill px-lg-5" onClick={() => {
             navigate('/product/order')
             localStorage.setItem('order', JSON.stringify({
-              "id" : id, "img":img, "rate" :rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage, "quantity":quantity
+              "id" : id, "img":img, "rate" :rating ,"quantity":quantity, "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage, "quantity":quantity
             }))
         }}>
           Buy Now
         </button>
         <button className="btn btn-outline-success rounded-pill px-lg-5" onClick={() => {
           dispatch(addToCart({
-            "id" : id, "img":img, "rate" :rating , "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
+            "id" : id, "img":img, "rate" :rating , "amount" : price,"quantity":quantity, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
           }))
         }}>
           Add to cart

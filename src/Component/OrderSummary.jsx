@@ -1,13 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
-const OrderSummary = () => {
+const OrderSummary = ({ firstName, lastName, address, city,  zipcode, mobile, email,setFirstName, setLastName, setAddress, setZipcode, setMobile, setEmail, setCity}) => {
+  const navigate = useNavigate()
+  const submitForm = (e) => {
+    e.preventDefault()
+    setFirstName("")
+    setLastName("")
+    setAddress("")
+    setCity("")
+    setZipcode("")
+    setMobile("")
+    setEmail("")
+    localStorage.removeItem('order')
+    navigate('/')
+  }
   return (
     <>
       <H4 className="fw-bold my-3">
         Enter your information to continue the delivery.
       </H4>
-      <form>
+      <form onSubmit={submitForm}>
         <div className="input-group gap-2">
           <div className="form-floating">
             <Input
@@ -15,6 +29,10 @@ const OrderSummary = () => {
               type="text"
               placeholder="Enter your first name"
               id="firstName"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
             />
             <Label className="form-label" htmlFor="firstName">
               First Name
@@ -26,6 +44,10 @@ const OrderSummary = () => {
               type="text"
               placeholder="Enter your last name"
               id="lastName"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
             />
             <Label className="form-label" htmlFor="lastName">
               Last Name
@@ -38,6 +60,10 @@ const OrderSummary = () => {
             type="text"
             placeholder="Enter your street adress"
             id="street"
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
           />
           <Label className="form-label" htmlFor="street">
             Street Adress
@@ -50,6 +76,10 @@ const OrderSummary = () => {
               type="text"
               placeholder="Enter your City"
               id="city"
+              value={city}
+              onChange={(e) => {
+                setCity(e.target.value);
+              }}
             />
             <Label className="form-label" htmlFor="city">
               City
@@ -61,6 +91,10 @@ const OrderSummary = () => {
               type="number"
               placeholder="Enter your zipcode"
               id="zipcode"
+              value={zipcode}
+              onChange={(e) => {
+                setZipcode(e.target.value);
+              }}
             />
             <Label className="form-label" htmlFor="zipcode">
               Zip code
@@ -68,27 +102,36 @@ const OrderSummary = () => {
           </div>
         </div>
         <div className="form-floating">
-        <Input
-              className="form-control shadow-none mt-2"
-              type="number"
-              placeholder="Enter your mobile number"
-              id="mobile"
-            />
-            <Label className="form-label" htmlFor="mobile">
-              Mobile Number
-            </Label>
+          <Input
+            className="form-control shadow-none mt-2"
+            type="number"
+            placeholder="Enter your mobile number"
+            id="mobile"
+            value={mobile}
+            onChange={(e) => {
+              setMobile(e.target.value);
+            }}
+          />
+          <Label className="form-label" htmlFor="mobile">
+            Mobile Number
+          </Label>
         </div>
         <div className="form-floating">
-        <Input
-              className="form-control shadow-none mt-2"
-              type="email"
-              placeholder="Enter your email id "
-              id="email"
-            />
-            <Label className="form-label" htmlFor="email">
-              Email ID
-            </Label>
+          <Input
+            className="form-control shadow-none mt-2"
+            type="email"
+            placeholder="Enter your email id "
+            id="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Label className="form-label" htmlFor="email">
+            Email ID
+          </Label>
         </div>
+        <button type="submit" className="btn btn-success w-100 mt-3">Proceed To Checkout</button>
       </form>
     </>
   );

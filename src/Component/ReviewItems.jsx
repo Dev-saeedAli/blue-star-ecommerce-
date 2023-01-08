@@ -73,7 +73,7 @@ const ReviewItems = () => {
               <H4 className="fw-bold text-capitalize mt-3 lh-base">{name}</H4>
               </div>
               <div className="col col-md-6 text-md-end text-center d-flex flex-column justify-content-center align-items-center align-items-md-end my-3 my-md-0 gap-2">
-              <p className="fw-bold">$ {parseInt(amount).toFixed(2)}</p>
+              <p className="fw-bold">$ {Math.round(parseInt((amount)) * quantity).toFixed(2)}</p>
               <div className='d-flex justify-content-md-end'>
               <Button className={`btn rounded-circle ${quantity === 1 ? " disabled" : "btn-success"}`} style={{maxWidth:"auto", textAlign:"center"}}onClick={decrement}>-</Button>
                     <p className="d-flex justify-content-between gap-2 align-items-center mx-2">
