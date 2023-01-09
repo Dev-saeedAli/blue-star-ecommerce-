@@ -37,8 +37,10 @@ const Categories = () => {
   useEffect(() => {
     dispatch(fetchCategories());
 
+
     return () => dispatch(fetchCategories());
   }, []);
+
 
   return (
     <section className="container my-4">

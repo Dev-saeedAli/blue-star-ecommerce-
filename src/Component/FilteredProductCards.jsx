@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {  useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import Spinner from "./Spinner";
 import ProductCategory from "./ProductCategory";
 import DefaultProduct from "./DefaultProduct";
@@ -35,15 +34,5 @@ const FilteredProductCards = () => {
     </>
   );
 };
-
-const H3 = styled.h3`
-  font-size: 1.1rem;
-  font-weight: bold;
-`;
-
-const Stars = styled.span`
-  font-size: 2rem;
-  color: #39a337;
-`;
 
 export default FilteredProductCards;

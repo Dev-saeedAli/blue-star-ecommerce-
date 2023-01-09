@@ -1,35 +1,33 @@
-import React, { Fragment ,useRef } from "react";
+import React, { Fragment, useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { decrement, increment, removeDuplicates, removeFromCart } from "../../app/features/Cart/cartSlice";
+
 
 const CartProducts = () => {
+  let { products } = useSelector(state => state.cartItems)
+
+    const dispatch =  useDispatch()
     const tableStyles = {background:"#198754", color:"white"}
-    const currentInput = useRef(null)
-    const localCart = JSON.parse(localStorage.getItem("cartItems"));
-    function removeDuplicates(originalArray, prop) {
-    let newArray = [];
-    let lookupObject = {};
-
-    for (let i in originalArray) {
-      lookupObject[originalArray[i][prop]] = originalArray[i];
-    }
-
-    for (let i in lookupObject) {
-      newArray.push(lookupObject[i]);
-    }
-    localStorage.setItem('cartItems', JSON.stringify(newArray))
-    return newArray;
-  }
-  removeDuplicates(localCart, "id");
-
-  const setAmount = (id, count) => {
-    const local = JSON.parse(localStorage.getItem('cartItems'))
-    localStorage.setItem('cartItems', JSON.stringify(local.filter(item => item.id === id ? item.quantity += count:item.quantity)))
-  }
+  
+    useEffect(()=> {
+      dispatch(removeDuplicates())
+    }, [])
 
 
   return (
     <div className="container my-3">
-      <div className="table-responsive">
+      {
+        products.length < 1?(
+         
+            <div className="text-center">
+              <h3 className="fw-bold">No items is in the cart </h3>
+              <Link to='/' className="mt-4">Click here to go back to the homepage</Link>
+            </div>
+        
+        ) : (
+          <div className="table-responsive">
         <table className="table">
           <thead style={tableStyles}>
             <tr className="text-center">
@@ -39,7 +37,7 @@ const CartProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {localCart?.map((item, index) => {
+            {products?.map((item, index) => {
               return (
                 <Fragment key={index}>
                   <tr className="text-center gap-3">
@@ -53,6 +51,7 @@ const CartProducts = () => {
                           Price : <span className="fw-bold">${Math.round(parseInt(item.amount)).toFixed(2)}</span>
                         </p>
                         <Button
+                        onClick={() => dispatch(removeFromCart(item.id))}
                           className="btn btn-outline-danger"
                           style={{ padding: "3px" }}
                         >
@@ -60,9 +59,14 @@ const CartProducts = () => {
                         </Button>
                       </div>
                     </td>
-                    <td><label htmlFor="quantityNo"></label><input style={{width:"50px"}} className="text-center mx-auto form-control" id="quantityNo" type="number" onChange={(e) => {
-                        setAmount(item.id, Number(e.target.value))
-                    }}/>
+                    <td>
+                      <div className="d-flex justify-content-center align-items-center gap-3">
+                      <button className={`btn btn-success rounded-pill ${item.quantity <= 1 ? "disabled" : ""}`} onClick={() => dispatch(decrement({id: item.id, quantity:1}))}>-
+                    </button>
+                    <span className="fw-bold">{item.quantity}</span>
+                    <button className="btn btn-success rounded-pill"  onClick={() => dispatch(increment({id : item.id, quantity: 1}))}>+
+                    </button>
+                      </div>
                     </td>
                     <td className="fw-bold">${Math.round(parseInt((item.amount)) * item.quantity).toFixed(2)}</td>
                   </tr>
@@ -72,6 +76,8 @@ const CartProducts = () => {
           </tbody>
         </table>
       </div>
+        )
+      }
     </div>
   );
 };

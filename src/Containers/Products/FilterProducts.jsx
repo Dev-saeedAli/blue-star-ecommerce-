@@ -1,18 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFilterList } from "../../app/features/filterCategorySlice/filterCategorySlice";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import Spinner from "../../Component/Spinner";
 import { AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
 import { fetchProductDetail } from "../../app/features/productDetail/productDetailSlice";
+import { addToCart } from "../../app/features/Cart/cartSlice";
+import { fetchSearchResults } from "../../app/features/search/searchSlice";
 
 const FilterProducts = () => {
+  const [quantity, setQuantity] = useState(1)
+  const { product } = useSelector((state) => state.searchItems)
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { loading, filterList, error } = useSelector(
     (state) => state.filterList
   );
+
+ useEffect(() => {
+  dispatch(fetchSearchResults('phone'))
+  
+ }, [])
+
 
   return (
     <div className="container">
@@ -60,7 +69,11 @@ const FilterProducts = () => {
                           &#9733;
                         </Stars>
                       ))}
-                         <button className="btn d-block btn-outline-success rounded-pill my-1">
+                         <button className="btn d-block btn-outline-success rounded-pill my-1" onClick={() => {
+                          dispatch(addToCart({
+                            "id" : id, "img":thumbnail, "rate" :rating , "amount" : price,"quantity":quantity,  "name" : title , "info":  description
+                          }))
+                         }}>
                             Add to Cart
                           </button>
                   </div>

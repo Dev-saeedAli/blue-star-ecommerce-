@@ -1,12 +1,14 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
+import { addToCart } from '../app/features/Cart/cartSlice';
 import { fetchProductDetailFilters } from '../app/features/productDetail/productDetailSlice';
 
 const ProductCategory = () => {
 const { productCategory } = useSelector(state => state.productList)
+const [quantity, setQuantity] = useState(1)
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
@@ -52,7 +54,11 @@ const dispatch = useDispatch()
                             &#9733;
                           </Stars>
                         ))}
-                      <button className="btn d-block btn-outline-success rounded-pill my-1">
+                      <button className="btn d-block btn-outline-success rounded-pill my-1" onClick={() => {
+                        dispatch(addToCart({
+                          "id" : id, "img":image, "rate" :rating , "amount" : price,"quantity":quantity, "name" : title
+                        }))
+                      }}>
                         Add to Cart
                       </button>
                     </div>
