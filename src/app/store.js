@@ -5,7 +5,7 @@ import productListReducer from "./features/getProductsList/getProductList"
 import filterListReducer from "./features/filterCategorySlice/filterCategorySlice"
 import productDetailReducer from "./features/productDetail/productDetailSlice"
 import cartReducer from "./features/Cart/cartSlice"
-import searchReducer from "./features/search/searchSlice"
+import favouriteReducer from "./features/Favourites/favourites";
 
 const store = configureStore({
     reducer:{
@@ -15,7 +15,7 @@ const store = configureStore({
         filterList : filterListReducer,
         productDetail : productDetailReducer,
         cartItems : cartReducer,
-        searchItems : searchReducer  
+        favourites :favouriteReducer,
     }
 })
 

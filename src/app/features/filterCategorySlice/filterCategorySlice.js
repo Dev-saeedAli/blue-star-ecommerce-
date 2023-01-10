@@ -13,6 +13,12 @@ export const fetchFilterList = createAsyncThunk('filters/fetchFilterList', async
     return data;
 })
 
+export const fetchSearchResults = createAsyncThunk('search/fetchSearchResults', async(name)=> {
+  const response = await fetch(`https://dummyjson.com/products/search?q=${name}`)
+  const data = await response.json()
+  return data.products
+}) 
+
 const filterSlice = createSlice({
     name : "filters",
     initialState,
@@ -29,8 +35,21 @@ const filterSlice = createSlice({
        builder.addCase(fetchFilterList.rejected, (state, action) => {
          state.loading = false
          state.filterList = []
-         state.error = action.payload.message
+         state.error = action.payload
        })
+       builder.addCase(fetchSearchResults.pending, (state)=> {
+        state.loading = true
+    })
+    builder.addCase(fetchSearchResults.fulfilled, (state, action)=> {
+        state.loading = false
+        state.filterList = action.payload
+        state.error =""
+    })
+    builder.addCase(fetchSearchResults.rejected, (state, action)=> {
+        state.loading = false
+        state.filterList = []
+        state.error = action.payload
+    })
     },
 });
 

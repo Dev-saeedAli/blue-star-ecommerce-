@@ -25,14 +25,19 @@ const cartSlice = createSlice({
             localStorage.setItem('cartItems', JSON.stringify(state.products))
           },
           removeDuplicates : (state) => {
+             //removing all the duplicates from the localstorage and resetting
             // https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects
             const ids = state.products.map(o => o.name)
             state.products = state.products.filter(({name}, index) => !ids.includes(name, index + 1))
+            localStorage.setItem('cartItems', JSON.stringify(state.products))
+        },
+        clearCart : (state) => {
+            state.products = []
             localStorage.setItem('cartItems', JSON.stringify(state.products))
           }
     }
 })
 
 export default cartSlice.reducer;
-export const { addToCart, removeFromCart, increment, decrement, removeDuplicates } =  cartSlice.actions
+export const { addToCart, removeFromCart, increment, decrement, removeDuplicates, clearCart } =  cartSlice.actions
 

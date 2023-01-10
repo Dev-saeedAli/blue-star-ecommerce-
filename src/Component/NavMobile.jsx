@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillCartFill } from "react-icons/bs";
-import { FaUserAlt } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -10,6 +10,8 @@ import Form from "./Form";
 const NavMobile = () => {
   const { products } = useSelector((state) => state.cartItems);
   const navigate = useNavigate()
+  const { favouriteList } = useSelector((state) => state.favourites);
+
   return (
     <>
       <nav className="navbar bg-body-tertiary d-lg-none d-block">
@@ -107,11 +109,16 @@ const NavMobile = () => {
               </ul>
               <hr className="divider" />
               <Form />
-              <div className="col d-flex align-items-center gap-3 mt-5 justify-content-center">
-                <FaUserAlt />
-                <Small>Account</Small>
-                <Small className="position-relative" onClick={() => navigate('/product/cart')}>
-                <BsFillCartFill />
+              <div className="col d-flex align-items-center gap-4 mt-5 justify-content-center" >
+                <Small className="position-relative"  style={{cursor:"pointer"}} onClick={() => navigate('/product/favourites')}>
+                <FaHeart size={30} onClick={() => navigate('/product/favourites')} />
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {favouriteList.length}
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                </Small>
+                <Small className="position-relative"  style={{cursor:"pointer"}} onClick={() => navigate('/product/cart')}>
+                <BsFillCartFill size={30}/>
                   {" "}
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {products.length}

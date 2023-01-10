@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { fetchSearchResults } from "../app/features/search/searchSlice";
+import { fetchSearchResults } from "../app/features/filterCategorySlice/filterCategorySlice";
 
 const Form = () => {
-  const [search, setSearch ] = useState("")
-  const [searched, setSearched] = useState(false)
+  const [search, setSearch ] = useState("phones")
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const styles = {
@@ -15,15 +14,9 @@ const Form = () => {
 
   const searchProducts = (event) => {
     event.preventDefault()
-    setSearched(!searched)
     navigate('/products/details')
+    dispatch(fetchSearchResults(search))
   }
-  useEffect(()=>{
-    if(searched){
-      dispatch(fetchSearchResults(search))
-    }
-  }, [])
-
 
   return (
     <>

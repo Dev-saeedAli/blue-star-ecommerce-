@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { addToCart } from '../app/features/Cart/cartSlice';
+import { addToFavourites } from '../app/features/Favourites/favourites';
 import { fetchProductDetailFilters } from '../app/features/productDetail/productDetailSlice';
 
 const DefaultProduct = () => {
@@ -23,18 +24,23 @@ const DefaultProduct = () => {
                     <div
                       className="card h-100 mh-100 position-relative"
                       onClick={(e) => {
-                        if (e.target.localName !== "button") {
+                        if (e.target.localName !== "button" && e.target.localName !== 'svg') {
                           dispatch(fetchProductDetailFilters(id));
                           navigate("product/detail/" + id);
                         }
                       }}
                     >
-                      <span className="badge rounded-pill position-absolute top-0 end-0">
+                      <span className="badge rounded-pill position-absolute top-0 end-0"
+                      onClick={() => {
+                        dispatch(addToFavourites({
+                          "id" : id, "img":image, "rate" :rating.rate , "amount" : price,"quantity":quantity, "name" : title
+                        }))
+                      }}>
                         <AiOutlineHeart
                           style={{ background: "white" }}
                           size={45}
                           color={"black"}
-                          className="border-2 p-2 rounded-circle border border-light"
+                          className="border-2 p-2 rounded-circle border border-light svg"
                         />
                       </span>
                       <img
