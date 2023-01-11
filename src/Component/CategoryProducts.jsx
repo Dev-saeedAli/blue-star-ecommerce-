@@ -52,7 +52,7 @@ const CategoryProducts = () => {
                         }}
                         className="img-fluid"
                         style={{
-                          objectFit: "cover",
+                          objectFit: "contain",
                           height: "80px",
                           cursor: "pointer",
                         }}

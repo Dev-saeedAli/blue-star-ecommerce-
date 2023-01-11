@@ -34,7 +34,7 @@ const FilterProducts = () => {
             {loading ? (
               <Spinner />
             ) : (
-              filterList?.products.map((item) => {
+              filterList?.map((item) => {
                 const { id, title, price, thumbnail, rating, description } =
                   item;
                 return (

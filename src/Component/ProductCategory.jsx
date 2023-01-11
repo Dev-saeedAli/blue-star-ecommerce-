@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillAccountBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
@@ -36,11 +36,18 @@ const dispatch = useDispatch()
                         "id" : id, "img":image, "rate" :rating.rate , "amount" : price,"quantity":quantity, "name" : title
                       }))
                     }}>
+                      
                       <AiOutlineHeart
                         style={{ background: "white" }}
                         size={45}
                         color={"black"}
-                        className="border-2 p-2 rounded-circle border border-light favIcon"
+                        className="border-2 p-2 rounded-circle border border-light"
+                      />
+                      <AiFillHeart
+                        style={{ background: "white" }}
+                        size={45}
+                        color={"black"}
+                        className="border-2 p-2 rounded-circle border border-light"
                       />
                     </span>
                     <img

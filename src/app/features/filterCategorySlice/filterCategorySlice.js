@@ -10,7 +10,7 @@ const initialState = {
 export const fetchFilterList = createAsyncThunk('filters/fetchFilterList', async(name)=> {
     const response = await fetch(`https://dummyjson.com/products/category/${name}`)
     const data = await response.json()
-    return data;
+    return data.products;
 })
 
 export const fetchSearchResults = createAsyncThunk('search/fetchSearchResults', async(name)=> {
