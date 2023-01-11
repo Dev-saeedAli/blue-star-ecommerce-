@@ -9,6 +9,10 @@ import {
   removeFromCart,
 } from "../../app/features/Cart/cartSlice";
 import SubTotal from "../../Component/SubTotal";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const CartProducts = () => {
   let { products } = useSelector((state) => state.cartItems);
@@ -16,7 +20,16 @@ const CartProducts = () => {
 
   const dispatch = useDispatch();
   const tableStyles = { background: "#198754", color: "white" };
-
+  const notify = (message) => toast(`${message}`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
   useEffect(() => {
     dispatch(removeDuplicates());
   }, []);
@@ -56,7 +69,7 @@ const CartProducts = () => {
                 return (
                   <Fragment key={index}>
                     <tr className="text-center gap-3">
-                      <td className="d-flex align-items-center gap-3 text-start">
+                      <TD className="d-flex align-items-center gap-3 text-start">
                         <img
                           src={item.img}
                           width="60px"
@@ -76,22 +89,27 @@ const CartProducts = () => {
                             </span>
                           </p>
                           <Button
-                            onClick={() => dispatch(removeFromCart(item.id))}
+                            onClick={() => {
+                              dispatch(removeFromCart(item.id))
+                              notify(`${item.name} has been removed from the cart`)
+                            }}
                             className="btn btn-outline-danger"
                             style={{ padding: "3px" }}
                           >
                             Remove
                           </Button>
                         </div>
-                      </td>
+                      </TD>
                       <td>
                         <div className="d-flex justify-content-center align-items-center gap-3">
                           <button
                             className={`btn btn-success rounded-pill ${
                               item.quantity <= 1 ? "disabled" : ""
                             }`}
-                            onClick={() =>
+                            onClick={() => {
                               dispatch(decrement({ id: item.id, quantity: 1 }))
+                              notify(`Your ${item.name} quantity has been reduced to ${item.quantity}`)
+                             }
                             }
                           >
                             -
@@ -99,8 +117,10 @@ const CartProducts = () => {
                           <span className="fw-bold">{item.quantity}</span>
                           <button
                             className="btn btn-success rounded-pill"
-                            onClick={() =>
+                            onClick={() => {
                               dispatch(increment({ id: item.id, quantity: 1 }))
+                              notify(`Your ${item.name} quantity has been increased to ${item.quantity}`)
+                            }
                             }
                           >
                             +
@@ -123,7 +143,7 @@ const CartProducts = () => {
             </tbody>
           </table>
         </div>
-      <SubTotal subTotal={subTotal}/>
+      <SubTotal subTotal={subTotal} products={products} proceed={true}/>
       </>
       )}
 
@@ -141,5 +161,8 @@ const Button = styled.button`
     color: darkred;
   }
 `;
+const TD = styled.td`
+  min-width: 18.75rem;
+`
 
 export default CartProducts;

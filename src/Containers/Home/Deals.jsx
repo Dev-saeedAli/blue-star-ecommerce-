@@ -32,7 +32,7 @@ const Deals = () => {
           </div>
           </div>
           ) : 
-        (product.map((item, index) => {
+        (product?.map((item, index) => {
             return (
               <button
                 onClick={()=> {

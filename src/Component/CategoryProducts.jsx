@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 import ProductDetailInfo from './ProductDetailInfo';
 
 const CategoryProducts = () => {
-    const displayImage = useRef();
-    const { categoryList } = useSelector(
-        (state) => state.productDetail
+  const displayImage = useRef();
+  const { categoryList } = useSelector(
+    (state) => state.productDetail
       );
-
   return (
     <>
    {

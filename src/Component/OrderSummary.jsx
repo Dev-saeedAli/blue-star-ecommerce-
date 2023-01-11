@@ -1,21 +1,53 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { clearCart } from "../app/features/Cart/cartSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const OrderSummary = ({ firstName, lastName, address, city,  zipcode, mobile, email,setFirstName, setLastName, setAddress, setZipcode, setMobile, setEmail, setCity}) => {
-  const navigate = useNavigate()
+
+const OrderSummary = ({ firstName, lastName, address, city, zipcode, mobile, email, setFirstName, setLastName, setAddress, setZipcode, setMobile, setEmail, setCity,
+}) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const submitForm = (e) => {
-    e.preventDefault()
-    setFirstName("")
-    setLastName("")
-    setAddress("")
-    setCity("")
-    setZipcode("")
-    setMobile("")
-    setEmail("")
-    localStorage.removeItem('order')
-    navigate('/')
-  }
+    e.preventDefault();
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      address !== "" &&
+      zipcode !== "" &&
+      mobile !== "" &&
+      email !== "" &&
+      city !== ""
+    ) {
+      setFirstName("");
+      setLastName("");
+      setAddress("");
+      setCity("");
+      setZipcode("");
+      setMobile("");
+      setEmail("");
+      localStorage.removeItem("order");
+      navigate("/");
+      dispatch(clearCart())
+      notify("Congragulations! Your order has been successfully completed.")
+    } else {
+      notify("Please fill the form to  continue proceeding your order");
+    }
+  };
+
+  const notify = (message) => toast(`${message}`, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
   return (
     <>
       <H4 className="fw-bold my-3">
@@ -131,7 +163,9 @@ const OrderSummary = ({ firstName, lastName, address, city,  zipcode, mobile, em
             Email ID
           </Label>
         </div>
-        <button type="submit" className="btn btn-success w-100 mt-3">Proceed To Checkout</button>
+        <button type="submit" className="btn btn-success w-100 mt-3">
+          Proceed To Checkout
+        </button>
       </form>
     </>
   );

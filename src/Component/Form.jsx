@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { fetchSearchResults } from "../app/features/filterCategorySlice/filterCategorySlice";
 
 const Form = () => {
-  const [search, setSearch ] = useState("phones")
+  const [search, setSearch ] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const styles = {

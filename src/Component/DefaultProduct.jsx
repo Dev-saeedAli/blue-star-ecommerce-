@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { addToCart } from '../app/features/Cart/cartSlice';
 import { addToFavourites } from '../app/features/Favourites/favourites';
 import { fetchProductDetailFilters } from '../app/features/productDetail/productDetailSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DefaultProduct = () => {
   const [quantity, setQuantity] = useState(1)
@@ -14,6 +16,18 @@ const DefaultProduct = () => {
     const { defaultProduct } = useSelector(
       (state) => state.productList
     );
+
+    const notify = (title, store) => toast(`${title} has been added to the ${store}`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  
     
   return (
     <Fragment>
@@ -35,7 +49,10 @@ const DefaultProduct = () => {
                         dispatch(addToFavourites({
                           "id" : id, "img":image, "rate" :rating.rate , "amount" : price,"quantity":quantity, "name" : title
                         }))
-                      }}>
+                        notify(title, "Favourites")
+                      }}
+                      style={{cursor:"pointer"}}
+                      >
                         <AiOutlineHeart
                           style={{ background: "white" }}
                           size={45}
@@ -69,6 +86,7 @@ const DefaultProduct = () => {
                           dispatch(addToCart({
                             "id" : id, "img":image, "rate" :rating , "amount" : price,"quantity":quantity, "name" : title
                           }))
+                          notify(title, 'Cart')
                         }}>
                           Add to Cart
                         </button>

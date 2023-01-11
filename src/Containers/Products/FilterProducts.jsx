@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Spinner from "../../Component/Spinner";
@@ -7,6 +7,8 @@ import styled from "styled-components";
 import { fetchProductDetail } from "../../app/features/productDetail/productDetailSlice";
 import { addToCart } from "../../app/features/Cart/cartSlice";
 import { addToFavourites } from "../../app/features/Favourites/favourites";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FilterProducts = () => {
   const [quantity, setQuantity] = useState(1);
@@ -15,6 +17,17 @@ const FilterProducts = () => {
   const { loading, filterList, error } = useSelector(
     (state) => state.filterList
   );
+
+  const notify = (title, store) => toast(`${title} has been added to the ${store}`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
 
   return (
     <div className="container">
@@ -43,22 +56,31 @@ const FilterProducts = () => {
                       className="card h-100 mh-100"
                       style={{ cursor: "pointer" }}
                       onClick={(e) => {
-                        if (e.target.localName !== "button" && e.target.localName !== 'svg') {
+                        if (
+                          e.target.localName !== "button" &&
+                          e.target.localName !== "svg"
+                        ) {
                           dispatch(fetchProductDetail(id));
                           navigate("/product/detail/" + id);
                         }
                       }}
                     >
-                      <span className="badge rounded-pill position-absolute top-0 end-0" onClick={() => {
-                        dispatch(addToFavourites({
-                          "id": id,
-                          "img": thumbnail,
-                          "rate": rating,
-                          "amount": price,
-                          "quantity": quantity,
-                          "name": title,
-                        }))
-                      }}>
+                      <span
+                        className="badge rounded-pill position-absolute top-0 end-0"
+                        onClick={() => {
+                          dispatch(
+                            addToFavourites({
+                              id: id,
+                              img: thumbnail,
+                              rate: rating,
+                              amount: price,
+                              quantity: quantity,
+                              name: title,
+                            })
+                          )
+                          notify(title, "Favourites")
+                        }}
+                      >
                         <AiOutlineHeart
                           style={{ background: "white" }}
                           size={45}
@@ -100,6 +122,7 @@ const FilterProducts = () => {
                         <button
                           className="btn d-block btn-outline-success rounded-pill my-1"
                           onClick={() => {
+                            notify(title, "Cart")
                             dispatch(
                               addToCart({
                                 id: id,

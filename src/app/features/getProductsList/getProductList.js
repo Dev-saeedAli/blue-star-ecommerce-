@@ -41,7 +41,6 @@ const productListSlice = createSlice({
         builder.addCase(getProductList.rejected, (state, action) => {
             state.loading = false
             state.productCategory = []
-            state.defaultProduct = []
             state.error = action.payload.message
         })
         builder.addCase(displayDefault.pending, (state) => {
@@ -58,9 +57,8 @@ const productListSlice = createSlice({
         })
         builder.addCase(displayDefault.rejected, (state, action) => {
             state.loading = false
-            state.productCategory = []
             state.defaultProduct = []
-            state.error = action.payload.message
+            state.error = action.payload
         })
     }
 })

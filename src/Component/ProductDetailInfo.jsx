@@ -3,15 +3,28 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { addToCart } from '../app/features/Cart/cartSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetailInfo = ({id, rating, price, stock, title , description, discountPercentage, img}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
-
+  
+  const notify = (title, store) => toast(`${title} has been added to the ${store}`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+  
   const increment = () => {
     setQuantity((prevQuantity) => prevQuantity += 1)
-   
+    
   }
   const decrement = () => {
     if(quantity <= 1){
@@ -60,10 +73,11 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
       </div>
       <div className="d-flex justify-content-center justify-content-lg-start gap-4 mt-4">
         <button className="btn btn-success rounded-pill px-lg-5" onClick={() => {
-            navigate('/product/order')
-            localStorage.setItem('order', JSON.stringify({
-              "id" : id, "img":img, "rate" :rating ,"quantity":quantity, "amount" : price, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage, "quantity":quantity
+            navigate('/product/cart')
+            dispatch(addToCart({
+              "id" : id, "img":img, "rate" :rating , "amount" : price,"quantity":quantity, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
             }))
+            notify(title, "Cart")
         }}>
           Buy Now
         </button>
@@ -71,6 +85,7 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
           dispatch(addToCart({
             "id" : id, "img":img, "rate" :rating , "amount" : price,"quantity":quantity, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
           }))
+          notify(title, "Cart")
         }}>
           Add to cart
         </button>

@@ -141,5 +141,6 @@ const Small = styled.small`
 
 const H1 = styled.h1`
   font-size: 1.5rem;
+  font-weight:bold;
 `;
 export default NavMobile;

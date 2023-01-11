@@ -6,14 +6,27 @@ import styled from 'styled-components';
 import { addToCart } from '../app/features/Cart/cartSlice';
 import {addToFavourites}  from '../app/features/Favourites/favourites';
 import { fetchProductDetailFilters } from '../app/features/productDetail/productDetailSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ProductCategory = () => {
-const { productCategory } = useSelector(state => state.productList)
-const [quantity, setQuantity] = useState(1)
-const navigate = useNavigate()
-const dispatch = useDispatch()
-
-
+  const { productCategory } = useSelector(state => state.productList)
+  const { favouriteList } = useSelector(state => state.favourites)
+  const [quantity, setQuantity] = useState(1)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+  const notify = (title, store) => toast(`${title} has been added to the ${store}`, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
   return (
     <Fragment>
     {
@@ -30,26 +43,24 @@ const dispatch = useDispatch()
                       }
                     }}
                   >
-                    <span className="badge rounded-pill position-absolute top-0 end-0" 
+                    <p className="badge rounded-pill position-absolute top-0 end-0" 
                     onClick={() => {
                       dispatch(addToFavourites({
                         "id" : id, "img":image, "rate" :rating.rate , "amount" : price,"quantity":quantity, "name" : title
                       }))
-                    }}>
-                      
-                      <AiOutlineHeart
+                      notify(title, 'favourites')
+                    }}
+                    style={{cursor:"pointer"}}
+                    >
+                        <span>
+                        <AiOutlineHeart
                         style={{ background: "white" }}
                         size={45}
                         color={"black"}
                         className="border-2 p-2 rounded-circle border border-light"
-                      />
-                      <AiFillHeart
-                        style={{ background: "white" }}
-                        size={45}
-                        color={"black"}
-                        className="border-2 p-2 rounded-circle border border-light"
-                      />
-                    </span>
+                        />
+                      </span>
+                    </p>
                     <img
                       src={image}
                       className="card-img-top"
@@ -72,6 +83,7 @@ const dispatch = useDispatch()
                         dispatch(addToCart({
                           "id" : id, "img":image, "rate" :rating , "amount" : price,"quantity":quantity, "name" : title
                         }))
+                        notify(title, "Cart")
                       }}>
                         Add to Cart
                       </button>
