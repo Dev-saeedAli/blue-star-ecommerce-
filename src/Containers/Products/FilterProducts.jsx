@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { fetchProductDetail } from "../../app/features/productDetail/productDetailSlice";
 import { addToCart } from "../../app/features/Cart/cartSlice";
 import { addToFavourites } from "../../app/features/Favourites/favourites";
+import { IoMdArrowRoundBack } from "react-icons/io"
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -37,9 +38,12 @@ const FilterProducts = () => {
         </h4>
       ) : (
         <>
-          <h3 className="text-center text-md-start fw-bold my-5">
+        <div className="d-flex align-items-center">
+          <IoMdArrowRoundBack style={{cursor:"pointer"}} size={50} onClick={() => navigate('/')}/>
+          <h3 className="text-center text-md-start fw-bold my-5 ">
             Top Categories
           </h3>
+        </div>
           <div
             className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4"
             style={{ minHeight: "70vh" }}

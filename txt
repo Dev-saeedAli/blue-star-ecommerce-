@@ -1,9 +1,0 @@
-// Pages 
-
-/*
-Home Page --> offers --> header --> bg slider --> shop our top categories --> choose todays deal for u --> choose by category --> todays-best-deal-for-u --> newsletter --> frequently-asked-question --> footer
-
-// Homepage --> filter Products --> Product detail Page -->  checkout Page
-
-
-*/

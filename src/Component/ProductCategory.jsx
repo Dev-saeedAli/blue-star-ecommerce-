@@ -37,7 +37,7 @@ const ProductCategory = () => {
                   <div
                     className="card h-100 mh-100"
                     onClick={(e) => {
-                      if (e.target.localName !== "button"&& e.target.localName !== "svg" ) {
+                      if (e.target.localName !== "button" && e.target.localName !== "svg" ) {
                         dispatch(fetchProductDetailFilters(id));
                         navigate("product/detail/" + id);
                       }

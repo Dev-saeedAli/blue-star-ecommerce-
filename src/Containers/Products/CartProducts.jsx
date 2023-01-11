@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   decrement,
@@ -11,6 +11,7 @@ import {
 import SubTotal from "../../Component/SubTotal";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 
@@ -19,6 +20,7 @@ const CartProducts = () => {
   const [subTotal, setSubTotal] = useState(0)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const tableStyles = { background: "#198754", color: "white" };
   const notify = (message) => toast(`${message}`, {
     position: "top-right",
@@ -46,6 +48,10 @@ const CartProducts = () => {
 
   return (
     <div className="container my-3">
+       <div className="d-flex align-items-center my-4 text-success" style={{cursor:"pointer"}}  onClick={() => navigate('/')}>
+       <IoMdArrowRoundBack style={{cursor:"pointer"}} size={50}/>
+       <strong className="fw-bold" style={{fontSize: "1.3rem"}}>Back</strong>
+      </div>
       {products.length < 1 ? (
         <div className="text-center">
           <h3 className="fw-bold">No items is in the cart </h3>

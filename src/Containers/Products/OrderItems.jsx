@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import DeliveryDetails from "../../Component/DeliveryDetails";
 import OrderSummary from "../../Component/OrderSummary";
@@ -17,7 +19,7 @@ const OrderItems = () => {
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const locals = localStorage.getItem('order') !== null ? JSON.parse(localStorage.getItem('order')) : []
-
+  const navigate = useNavigate()
   useEffect(()=> {
     if(locals.length > 0){
       setSubTotal(locals?.map(({amount, quantity}) => {
@@ -25,10 +27,14 @@ const OrderItems = () => {
       }).reduce((total, item) => total += item))
       setChanged(!changed)
     }
-  }, [locals])
+  }, [])
 
   return (
     <div className="container">
+      <div className="d-flex align-items-center my-4 text-success" style={{cursor:"pointer"}}  onClick={() => navigate('/')}>
+       <IoMdArrowRoundBack style={{cursor:"pointer"}} size={50}/>
+       <strong className="fw-bold" style={{fontSize: "1.3rem"}}>Back</strong>
+      </div>
       <div className="row row-cols-2 my-4 justify-content-evenly align-items-baseline gap-2">
         <div className="col-12 col-md-6">
           <ReviewItems />
