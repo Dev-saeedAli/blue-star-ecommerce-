@@ -5,14 +5,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ReviewItems = () => {
+const ReviewItems = ({setChanged, changed}) => {
   const locals =
     localStorage.getItem("order") !== null
       ? JSON.parse(localStorage.getItem("order"))
       : [];
 
   const [count, setCount] = useState(false); // made for updating the component when the local storage changes
-  const navigate = useNavigate();
   const [filterLocals, setFilteredLocals] = useState([]);
   const notify = (message) =>
     toast(`${message}`, {
@@ -32,6 +31,7 @@ const ReviewItems = () => {
       locals.filter(({ name }, index) => !ids.includes(name, index + 1))
     );
     localStorage.setItem("cartItems", JSON.stringify(filterLocals));
+    setChanged(!changed)
   }, [count]);
 
   const increment = (itemName) => {
@@ -44,6 +44,7 @@ const ReviewItems = () => {
     setCount(
       locals?.map((item) => (item.name === itemName ? item.quantity : 1))
     );
+    setChanged(!changed)
   };
   const decrement = (itemName) => {
     const modifiedObj = locals?.map((item) =>
@@ -55,11 +56,13 @@ const ReviewItems = () => {
     setCount(
       locals?.map((item) => (item.name === itemName ? item.quantity : 1))
     );
+    setChanged(!changed)
   };
   const clearStorage = (itemName) => {
     const modifiedObj = locals?.filter((item) => item.name !== itemName);
     localStorage.setItem("order", JSON.stringify(modifiedObj));
     setCount(!count);
+    setChanged(!changed)
   };
 
   return (

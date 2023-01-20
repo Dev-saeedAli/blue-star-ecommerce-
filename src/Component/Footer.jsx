@@ -7,7 +7,6 @@ import americalExpress from "../images/symbol (2).png";
 import paypal from "../images/paypal.png";
 import applePay from  "../images/apple-pay.png";
 import amazonPay from "../images/amazon-pay.png";
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -23,24 +22,24 @@ const Footer = () => {
             <div className="col-12 mt-3 text-center">
               <H3 className='fw-bold'>Accepted Payments</H3>
               <div className='mt-3 d-flex justify-content-start flex-wrap gap-3'>
-             <a href="https://www.flaticon.com/free-icons/visa" target="_blank" title="visa icons">
+             <a href="https://www.flaticon.com/free-icons/visa" target="_blank" rel="noreferrer" title="visa icons">
              <PaymentCards src={visa} alt="visa image" />
              </a>
               
-             <a href="https://www.flaticon.com/free-icons/google-wallet"  target="_blank" title="google wallet icons"> <PaymentCards src={googleWallet} alt="googlewallet  image" />
+             <a href="https://www.flaticon.com/free-icons/google-wallet"  target="_blank" rel="noreferrer" title="google wallet icons"> <PaymentCards src={googleWallet} alt="googlewallet  image" />
              </a>
              
-             <a href="https://www.flaticon.com/free-icons/american-express"  target="_blank" title="american express icons"><PaymentCards src={americalExpress} alt="googlewallet  image" />
+             <a href="https://www.flaticon.com/free-icons/american-express"  target="_blank" rel="noreferrer" title="american express icons"><PaymentCards src={americalExpress} alt="googlewallet  image" />
              </a>
               
-             <a href="https://www.flaticon.com/free-icons/paypal"  target="_blank" title="paypal icons">     <PaymentCards src={paypal} alt="paypal card image" />
+             <a href="https://www.flaticon.com/free-icons/paypal"  target="_blank" rel="noreferrer" title="paypal icons">     <PaymentCards src={paypal} alt="paypal card image" />
              </a>
 
-             <a href="https://www.flaticon.com/free-icons/apple-pay"  target="_blank" title="apple pay icons"> <PaymentCards src={applePay} alt="applepay image" />
+             <a href="https://www.flaticon.com/free-icons/apple-pay"  target="_blank" rel="noreferrer" title="apple pay icons"> <PaymentCards src={applePay} alt="applepay image" />
              </a>
 
          
-             <a href="https://www.flaticon.com/free-icons/amazon-pay" target="_blank" title="amazon pay icons"> <PaymentCards src={amazonPay} alt="amazonpay image" /></a>
+             <a href="https://www.flaticon.com/free-icons/amazon-pay" target="_blank" rel="noreferrer" title="amazon pay icons"> <PaymentCards src={amazonPay} alt="amazonpay image" /></a>
              
               </div>
             </div>

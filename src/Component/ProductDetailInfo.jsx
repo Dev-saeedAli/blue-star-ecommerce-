@@ -75,7 +75,7 @@ const ProductDetailInfo = ({id, rating, price, stock, title , description, disco
         <button className="btn btn-success rounded-pill px-lg-5" onClick={() => {
             navigate('/product/cart')
             dispatch(addToCart({
-              "id" : id, "img":img, "rate" :rating , "amount" : price,"quantity":quantity, "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
+              "id" : id, "img":img, "rate" : rating , "amount" : price,"quantity": quantity , "sale" : stock, "name" : title , "info":  description, "discount" : discountPercentage
             }))
             notify(title, "Cart")
         }}>

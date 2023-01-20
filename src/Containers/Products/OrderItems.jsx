@@ -22,12 +22,11 @@ const OrderItems = () => {
   const navigate = useNavigate()
   useEffect(()=> {
     if(locals.length > 0){
-      setSubTotal(locals?.map(({amount, quantity}) => {
+      setSubTotal(locals?.map(({amount, quantity}) => { 
         return Math.round(parseInt(amount)) * parseInt(quantity) ;
-      }).reduce((total, item) => total += item))
-      setChanged(!changed)
-    }
-  }, [])
+      }).reduce((total, item) => total += item, 0))
+    }// eslint-disable-next-line
+  }, [changed])
 
   return (
     <div className="container">
@@ -37,7 +36,7 @@ const OrderItems = () => {
       </div>
       <div className="row row-cols-2 my-4 justify-content-evenly align-items-baseline gap-2">
         <div className="col-12 col-md-6">
-          <ReviewItems />
+          <ReviewItems changed={changed} setChanged={setChanged} />
           <div className="row">
             <div className="col border border-2">
               <DeliveryDetails
